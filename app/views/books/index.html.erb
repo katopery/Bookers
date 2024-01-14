@@ -9,7 +9,7 @@
   </thead>
     
   <tbody>
-    <% @books_index.each do |book| %>
+    <% @books.each do |book| %>
       <tr>
         <td><%= book.title %></td>
         <td><%= book.body %></td>
@@ -22,26 +22,30 @@
 </table>
 
 <h2>New book</h2>
-<% if @book_index.errors.any? %>
-  <% if @book_index.errors.count == 1 %>
-    <%= @book_index.errors.count %>error prohibited this book from being saved:
+<% if @book_new.errors.any? %>
+  <% if @book_new.errors.count == 1 %>
+    <%= @book_new.errors.count %>error prohibited this book from being saved:
   <% else %>
-    <%= @book_index.errors.count %>errors prohibited this book from being saved:
+    <%= @book_new.errors.count %>errors prohibited this book from being saved:
   <% end %>
   
   <ul>
-    <% @book_index.errors.full_messages.each do |message| %>
+    <% @book_new.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>
 <% end %>
 
-<%= form_with model: Book.new do |f| %>
-  <p>Title</p>
-  <%= f.text_field :title %>
+<%= form_with model: @book_new do |f| %>
+  <div>
+    <label>Title</label>
+    <%= f.text_field :title %>
+  </div>
   
-  <p>Body</p>
-  <%= f.text_area :body%>
+  <div>
+    <label>Body</label>
+    <%= f.text_area :body%>
+  </div>
   
   <%= f.submit 'Create Book' %>
 <% end %>
